@@ -15,13 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 class App {
-    constructor() {
+    constructor(port) {
+        this.port = port;
         this.app = express_1.default();
+    }
+    settings() {
+        this.app.set('port', this.port || process.env.PORT || 3000);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.app.listen(3000);
-            console.log(`server on port 3000`);
+            yield this.app.listen();
+            console.log(`server on port ${this.port}`);
         });
     }
 }
